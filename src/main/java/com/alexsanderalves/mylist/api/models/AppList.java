@@ -10,7 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "lists")
-public class AppList {
+public class AppList implements ViewEntity {
 	
 	@Id
 	@GeneratedValue(generator = "UUID")
@@ -49,8 +49,9 @@ public class AppList {
         this.type = type;
     }
 
+    @Override
     public String toString() {
-        return "{ id: " + this.getId() + ", name: " + this.getName() + ", type: " + this.getType() + ", belongsToUser: " + this.getBelongsToUser() + " }";
+        return this.getName();
     }
 
 	public String getBelongsToUser() {
@@ -60,4 +61,9 @@ public class AppList {
 	public void setBelongsToUser(String belongsToUser) {
 		this.belongsToUser = belongsToUser;
 	}
+	
+	public String getViewText() {
+		return this.getName();
+	}
+	
 }

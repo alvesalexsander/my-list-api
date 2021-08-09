@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements ViewEntity {
 	
 	@Id
 	@Column(name = "name", updatable = false, nullable = false)
@@ -33,6 +33,10 @@ public class User {
 
     public String toString() {
         return "{ name: " + this.getName() + " }";
+    }
+    
+    public String getViewText() {
+    	return getName();
     }
 
 }
