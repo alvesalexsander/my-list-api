@@ -19,27 +19,28 @@ public class ListItemService implements IListItemService {
 	private TodoListItemsRepository todoListRepository;
 
 	@Override
-	public Optional<ListItem> findById(String id, String itemType) {
-		CrudRepository<ListItem, String> repository = getRepositoryByModelName(itemType);
-		return repository.findById(id);
+	public Optional<TodoListItem> findTodoListItemById(String id) {
+		return todoListRepository.findById(id);
 	}
 
 	@Override
-	public ArrayList<ListItem> findListItems(String listType, String listId) {
-		Object repository = getRepositoryByListType(listType);
-		return (ArrayList) ((TodoListItemsRepository) repository).findAllByBelongsToList(listId);
-	}
-
-	@Override
-	public ListItem save(ListItem listItem, String listType) {
-		CrudRepository<ListItem, String> repository = getRepositoryByListType(listType);
-		return repository.save(listItem);
+	public ArrayList<TodoListItem> findTodoListItems(String listId) {
+		return todoListRepository.findAllByBelongsToList(listId);
 	}
 	
 	@Override
-	public void delete(ListItem listItem, String listType) {
-		CrudRepository<ListItem, String> repository = getRepositoryByListType(listType);
-		repository.delete(listItem);
+	public void setCompletion(String itemId, boolean status) {
+		todoListRepository.setCompletion(itemId, status);
+	}
+
+	@Override
+	public TodoListItem saveTodoListItem(TodoListItem listItem) {
+		return todoListRepository.save(listItem);
+	}
+	
+	@Override
+	public void deleteTodoListItem(TodoListItem listItem) {
+		todoListRepository.delete(listItem);
 	}
 
 	private CrudRepository<ListItem, String> getRepositoryByModelName(String itemType) {

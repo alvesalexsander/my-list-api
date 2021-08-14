@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alexsanderalves.mylist.api.models.AppList;
-import com.alexsanderalves.mylist.api.models.ListItem;
+import com.alexsanderalves.mylist.api.models.TodoListItem;
 import com.alexsanderalves.mylist.api.services.ListItemService;
 
 @RestController
@@ -20,20 +19,26 @@ public class ListItemController {
 	@Autowired
 	private ListItemService listItemService;
 	
-	@GetMapping("/list-item/{listType}/{listId}")
-	public ArrayList<ListItem> findListItemsByList(@PathVariable(required=true) String listType, @PathVariable(required=true) String listId) {
-		return listItemService.findListItems(listType, listId);
+	@GetMapping("/list-item/todo/{listId}")
+	public ArrayList<TodoListItem> findTodoItemsByList(@PathVariable(required=true) String listId) {
+		return listItemService.findTodoListItems(listId);
 	}
 	
-	@PostMapping("/list-item/create")
-	public ListItem createList(@RequestBody ListItem list, @PathVariable(required=true) String listType) {
-		return listItemService.save(list, listType);
+	@PostMapping("/list-item/todo/create")
+	public TodoListItem createList(@RequestBody TodoListItem list) {
+		System.out.println(list);
+		return listItemService.saveTodoListItem(list);
 	}
 	
-	@DeleteMapping("/list-item/{listType}/delete")
-	public boolean deleteListItem(@RequestBody ListItem list, @PathVariable(required=true) String listType) {
+	@PostMapping("/list-item/todo/complete/{itemId}/{status}")
+	public void setCompletion(@PathVariable(required=true) String itemId, @PathVariable(required=true) boolean status) {
+		listItemService.setCompletion(itemId, status);
+	}
+	
+	@DeleteMapping("/list-item/todo/delete")
+	public boolean deleteListItem(@RequestBody TodoListItem list) {
 		try{
-			listItemService.delete(list, listType);
+			listItemService.deleteTodoListItem(list);
 			return true;
 		} catch (Exception error) {
 			return false;

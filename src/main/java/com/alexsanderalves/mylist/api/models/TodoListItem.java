@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="todo-items")
+@Table(name="todo_items")
 public class TodoListItem extends ListItem implements ViewEntity {
 
 	@Id
@@ -23,15 +23,27 @@ public class TodoListItem extends ListItem implements ViewEntity {
     @Column(name = "id", updatable = false, nullable = false)
 	private String id;
 	
+	private String name;
 	private boolean completed = false;
+	private LocalDateTime completionDate;
 	private LocalDateTime deadline;
 	private String belongsToList;
 	
-	@Override
-	public String getViewText() {
-		return getName();
+	public String getId() {
+		return id;
 	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public LocalDateTime getDeadline() {
 		return deadline;
@@ -60,4 +72,17 @@ public class TodoListItem extends ListItem implements ViewEntity {
 		this.belongsToList = belongsToList;
 	}
 
+	public LocalDateTime getCompletion_date() {
+		return completionDate;
+	}
+
+	public void setCompletion_date(LocalDateTime completion_date) {
+		this.completionDate = completion_date;
+	}
+
+	@Override
+	public String getViewText() {
+		return getName();
+	}
+	
 }
