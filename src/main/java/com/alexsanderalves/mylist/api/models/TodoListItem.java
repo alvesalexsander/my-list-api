@@ -1,6 +1,7 @@
 package com.alexsanderalves.mylist.api.models;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="todo_items")
-public class TodoListItem extends ListItem implements ViewEntity {
+public class TodoListItem implements ViewEntity {
 
 	@Id
 	@GeneratedValue(generator = "UUID")
@@ -24,10 +25,15 @@ public class TodoListItem extends ListItem implements ViewEntity {
 	private String id;
 	
 	private String name;
-	private boolean completed = false;
-	private LocalDateTime completionDate;
-	private LocalDateTime deadline;
 	private String belongsToList;
+	private int order;
+	private boolean completed = false;
+	private long completionDate;
+	private long createdAt;
+	private long startline;
+	private long deadline;
+	private String annotations = "";
+	private String labels;
 	
 	public String getId() {
 		return id;
@@ -45,12 +51,12 @@ public class TodoListItem extends ListItem implements ViewEntity {
 		this.name = name;
 	}
 
-	public LocalDateTime getDeadline() {
+	public long getDeadline() {
 		return deadline;
 	}
 
 
-	public void setDeadline(LocalDateTime deadline) {
+	public void setDeadline(long deadline) {
 		this.deadline = deadline;
 	}
 
@@ -72,17 +78,57 @@ public class TodoListItem extends ListItem implements ViewEntity {
 		this.belongsToList = belongsToList;
 	}
 
-	public LocalDateTime getCompletion_date() {
+	public long getCompletion_date() {
 		return completionDate;
 	}
 
-	public void setCompletion_date(LocalDateTime completion_date) {
+	public void setCompletion_date(long completion_date) {
 		this.completionDate = completion_date;
 	}
 
 	@Override
 	public String getViewText() {
 		return getName();
+	}
+
+	public long getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(long createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public long getStartline() {
+		return startline;
+	}
+
+	public void setStartline(long startline) {
+		this.startline = startline;
+	}
+
+	public String getLabels() {
+		return labels;
+	}
+
+	public void setLabels(String labels) {
+		this.labels = labels;
+	}
+
+	public String getAnnotations() {
+		return annotations;
+	}
+
+	public void getAnnotations(String annotations) {
+		this.annotations = annotations;
+	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
 	}
 	
 }

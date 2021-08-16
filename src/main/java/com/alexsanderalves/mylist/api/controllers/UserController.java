@@ -1,5 +1,7 @@
 package com.alexsanderalves.mylist.api.controllers;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alexsanderalves.mylist.api.models.User;
 import com.alexsanderalves.mylist.api.services.IUsersService;
+import com.alexsanderalves.mylist.api.utils.DateUtils;
 
 @RestController
 public class UserController {
@@ -29,6 +32,12 @@ public class UserController {
 	@PostMapping("/users/get")
 	public User getUser(@RequestBody User user) {
 		return this.usersService.findUser(user);
+	}
+	
+	@PostMapping("/users/create")
+	public User createUser(@RequestBody User user) {
+		user.setCreatedAt(DateUtils.getLongNow());
+		return this.usersService.create(user);
 	}
 	
 }

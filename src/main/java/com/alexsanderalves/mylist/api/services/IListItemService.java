@@ -11,6 +11,6 @@ public interface IListItemService {
 	public ArrayList<TodoListItem> findTodoListItems(String listId);
 	public void setCompletion(String itemId, boolean status);
 	public TodoListItem saveTodoListItem(TodoListItem listItem);
-	public void deleteTodoListItem(TodoListItem listItem);
+	public void deleteTodoListItem(String itemId);
 	
 }

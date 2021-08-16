@@ -8,6 +8,6 @@ public interface IUsersService {
 
 	public User findUser(User user);
 	public Optional<User> findById(String id);
-	public User save(User list);
+	public User create(User user);
 	
 }

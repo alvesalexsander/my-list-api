@@ -1,5 +1,7 @@
 package com.alexsanderalves.mylist.api.controllers;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alexsanderalves.mylist.api.models.TodoListItem;
 import com.alexsanderalves.mylist.api.services.ListItemService;
+import com.alexsanderalves.mylist.api.utils.DateUtils;
 
 @RestController
 public class ListItemController {
@@ -26,7 +29,8 @@ public class ListItemController {
 	
 	@PostMapping("/list-item/todo/create")
 	public TodoListItem createList(@RequestBody TodoListItem list) {
-		System.out.println(list);
+		list.setCreatedAt(DateUtils.getLongNow());
+		list.setOrder(0);
 		return listItemService.saveTodoListItem(list);
 	}
 	
@@ -35,12 +39,14 @@ public class ListItemController {
 		listItemService.setCompletion(itemId, status);
 	}
 	
-	@DeleteMapping("/list-item/todo/delete")
-	public boolean deleteListItem(@RequestBody TodoListItem list) {
+	@DeleteMapping("/list-item/todo/delete/{itemId}")
+	public boolean deleteListItem(@PathVariable(required=true) String itemId) {
+		System.out.println(itemId);
 		try{
-			listItemService.deleteTodoListItem(list);
+			listItemService.deleteTodoListItem(itemId);
 			return true;
 		} catch (Exception error) {
+			System.out.println(itemId);
 			return false;
 		}
 	}

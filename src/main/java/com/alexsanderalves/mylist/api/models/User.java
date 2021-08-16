@@ -1,5 +1,8 @@
 package com.alexsanderalves.mylist.api.models;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,6 +17,9 @@ public class User implements ViewEntity {
 	@Column(name = "name", updatable = false, nullable = false)
 	private String name;
 	private String password;
+	private long createdAt;
+	private String role = "customer";
+	private String groupId;
 
     public String getName() {
         return name;
@@ -38,5 +44,29 @@ public class User implements ViewEntity {
     public String getViewText() {
     	return getName();
     }
+
+	public long getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(long createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
 
 }

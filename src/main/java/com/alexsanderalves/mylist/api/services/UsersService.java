@@ -1,5 +1,7 @@
 package com.alexsanderalves.mylist.api.services;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.alexsanderalves.mylist.api.models.User;
 import com.alexsanderalves.mylist.api.repositories.UsersRepository;
+import com.alexsanderalves.mylist.api.utils.DateUtils;
 
 @Service
 public class UsersService implements IUsersService {
@@ -23,6 +26,7 @@ public class UsersService implements IUsersService {
 			return foundUser.get();
 		} else {
 			System.out.println("RETORNANDO NOVO USER");
+			user.setCreatedAt(DateUtils.getLongNow());
 			return this.usersRepository.save(user);
 		}
 	}
@@ -33,8 +37,9 @@ public class UsersService implements IUsersService {
 	}
 	
 	@Override
-	public User save(User list) {
-		return usersRepository.save(list);
+	public User create(User user) {
+		user.setCreatedAt(DateUtils.getLongNow());
+		return usersRepository.save(user);
 	}
 
 }
