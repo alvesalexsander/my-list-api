@@ -30,7 +30,6 @@ public class ListItemController {
 	@PostMapping("/list-item/todo/create")
 	public TodoListItem createList(@RequestBody TodoListItem list) {
 		list.setCreatedAt(DateUtils.getLongNow());
-		list.setOrder(0);
 		return listItemService.saveTodoListItem(list);
 	}
 	

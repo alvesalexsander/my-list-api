@@ -1,6 +1,5 @@
 package com.alexsanderalves.mylist.api.repositories;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -36,10 +35,10 @@ public interface TodoListItemsRepository extends CrudRepository<TodoListItem, St
 	public void setDeadline(@Param(value = "id") String id,
 			@Param(value = "deadline") long deadline);
 	
-//	@Modifying
-//	@Transactional
-//	@Query("update TodoListItem set order = :order where id = :id")
-//	public void setOrder(@Param(value = "id") String id,
-//			@Param(value = "order") int order);
+	@Modifying
+	@Transactional
+	@Query("update TodoListItem set list_placement = :listPlacement where id = :id")
+	public void setOrder(@Param(value = "id") String id,
+			@Param(value = "listPlacement") int listPlacement);
 	 
 }

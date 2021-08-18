@@ -26,7 +26,7 @@ public class TodoListItem implements ViewEntity {
 	
 	private String name;
 	private String belongsToList;
-	private int order;
+	private int listPlacement;
 	private boolean completed = false;
 	private long completionDate;
 	private long createdAt;
@@ -123,12 +123,12 @@ public class TodoListItem implements ViewEntity {
 		this.annotations = annotations;
 	}
 
-	public int getOrder() {
-		return order;
+	public int getListPlacement() {
+		return listPlacement;
 	}
 
-	public void setOrder(int order) {
-		this.order = order;
+	public void setListPlacement(int listPlacement) {
+		this.listPlacement = listPlacement;
 	}
 	
 }
