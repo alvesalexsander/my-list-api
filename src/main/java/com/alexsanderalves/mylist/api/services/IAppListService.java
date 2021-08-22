@@ -11,5 +11,6 @@ public interface IAppListService {
 	public Optional<AppList> findById(String id);
 	public ArrayList<AppList> findAllByBelongsToUser(String userName);
 	public AppList save(AppList list);
+	public void deleteList(String listId);
 	
 }

@@ -34,4 +34,9 @@ public class AppListService implements IAppListService {
 	public ArrayList<AppList> findAllByBelongsToUser(String userName) {
 		return appListRepository.findAllByBelongsToUser(userName);
 	}
+	
+	@Override
+	public void deleteList(String listId) {
+		appListRepository.deleteById(listId);
+	}
 }

@@ -6,6 +6,7 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,16 @@ public class AppListController {
 		System.out.println(createdList);
 		return createdList;
 	}
-
+	
+	@DeleteMapping("/lists/delete/{listId}")
+	public boolean deleteList(@PathVariable(required=true) String listId) {
+		try{
+			listService.deleteList(listId);
+			return true;
+		} catch (Exception error) {
+			System.out.println(listId);
+			return false;
+		}
+	}
 	
 }
