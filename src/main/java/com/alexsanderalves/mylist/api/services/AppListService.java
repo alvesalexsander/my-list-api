@@ -39,4 +39,13 @@ public class AppListService implements IAppListService {
 	public void deleteList(String listId) {
 		appListRepository.deleteById(listId);
 	}
+	
+	@Override
+	public void updateById(AppList list) {
+		appListRepository.updateById(
+				list.getId(),
+				list.getName()
+		);
+	}
+	
 }

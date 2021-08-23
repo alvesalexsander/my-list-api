@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,6 +48,17 @@ public class AppListController {
 			return true;
 		} catch (Exception error) {
 			System.out.println(listId);
+			return false;
+		}
+	}
+	
+	@PatchMapping("/lists/update")
+	public boolean update(@RequestBody AppList list) {
+		try{
+			listService.updateById(list);
+			return true;
+		} catch (Exception error) {
+			System.out.println(list);
 			return false;
 		}
 	}
